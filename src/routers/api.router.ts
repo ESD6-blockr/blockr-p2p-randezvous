@@ -26,6 +26,7 @@ export class ApiRouter {
      * Configure the routes.
      */
     public configure(): void {
+        // Get request /peerType
         this.router.get("/:peerType", (req, res) => {
             try {
                 res.status(HttpStatus.OK).json(this.peerService.getPeer(req.params.peerType));
@@ -34,6 +35,7 @@ export class ApiRouter {
             }
         });
 
+        // Post request /peerType?ip=ip&guid=guid
         this.router.post("/:peerType", (req, res) => {
             try {
                 this.peerService.addPeer(req.params.peerType, req.query.ip, req.query.guid);

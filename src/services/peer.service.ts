@@ -25,7 +25,7 @@ export class PeerService {
         const peerRegistry = this.peerRegistries.get(peerType);
 
         if (!peerRegistry) {
-            throw new UnknownPeerTypeException(`No implementation found for Peer Type '${peerType}`);
+            throw new UnknownPeerTypeException(`No implementation found for Peer Type '${peerType}'`);
         }
 
         return peerRegistry.getIp();

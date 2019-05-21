@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build-watch": "tsc -w -p tsconfig.json",
-    "test": "exit 0;",
+    "test": "jest || exit 0",
     "lint": "tslint --project tsconfig.json",
     "dev": "npm run build && npm run lint"
   },
@@ -17,6 +17,9 @@
   },
   "author": "Blockr",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ESD6-blockr/blockr-p2p-rendezvous/issues"
+  },
   "dependencies": {
     "@blockr/blockr-logger": "^1.1.0-3",
     "@sentry/node": "^5.1.2",
@@ -28,7 +31,11 @@
   "devDependencies": {
     "@types/cors": "^2.8.5",
     "@types/express": "^4.16.1",
+    "@types/jest": "^24.0.12",
     "@types/node": "^11.13.7",
+    "jest": "^24.8.0",
+    "jest-junit": "^6.4.0",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
     "tsutils": "^3.10.0",
     "typescript": "^3.4.3"
