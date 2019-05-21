@@ -5,7 +5,7 @@ import { RegistryEntry } from "../models/registryEntry";
  */
 export class PeerRegistry {
     public readonly connectionTimeoutDuration: number;
-    private ipEntries: Map<string, RegistryEntry>;
+    private readonly ipEntries: Map<string, RegistryEntry>;
 
     constructor(connectionTimeoutDuration: number) {
         this.connectionTimeoutDuration = connectionTimeoutDuration;

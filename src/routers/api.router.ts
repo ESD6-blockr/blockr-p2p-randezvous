@@ -1,4 +1,5 @@
 import { Router } from "express";
+import * as HttpStatus from "http-status-codes";
 
 import { PeerService } from "../services/peer.service";
 
@@ -27,18 +28,18 @@ export class ApiRouter {
     public configure(): void {
         this.router.get("/:peerType", (req, res) => {
             try {
-                res.status(200).json(this.peerService.getPeer(req.params.peerType));
+                res.status(HttpStatus.OK).json(this.peerService.getPeer(req.params.peerType));
             } catch (error) {
-                res.status(500).send({error: error.message, type: error.name});
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({error: error.message, type: error.name});
             }
         });
 
         this.router.post("/:peerType", (req, res) => {
             try {
                 this.peerService.addPeer(req.params.peerType, req.query.ip, req.query.guid);
-                res.status(201).send();
+                res.status(HttpStatus.CREATED).send();
             } catch (error) {
-                res.status(500).send({error: error.message, type: error.name});
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({error: error.message, type: error.name});
             }
         });
     }

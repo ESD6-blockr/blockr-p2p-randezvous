@@ -2,11 +2,13 @@ import { UnknownPeerTypeException } from "../exceptions/unknownPeerType.exceptio
 import { PeerType } from "../models/peerTypes";
 import { PeerRegistry } from "../registries/peer.registry";
 
+const CONNECTION_TIMEOUT_DURATION_MINUTES = 5
+
 /**
  * Handles the Peer Registries.
  */
 export class PeerService {
-    private peerRegistries: Map<PeerType, PeerRegistry>;
+    private readonly peerRegistries: Map<PeerType, PeerRegistry>;
 
     constructor() {
         this.peerRegistries = new Map<PeerType, PeerRegistry>();
@@ -41,7 +43,7 @@ export class PeerService {
         let peerRegistry = this.peerRegistries.get(peerType);
 
         if (!peerRegistry) {
-            peerRegistry = new PeerRegistry(5);
+            peerRegistry = new PeerRegistry(CONNECTION_TIMEOUT_DURATION_MINUTES);
             this.peerRegistries.set(peerType, peerRegistry);
         }
 
