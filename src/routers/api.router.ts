@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { UnknownPeerTypeException } from "../exceptions/unknownPeerType.exception";
 
 import { PeerService } from "../services/peer.service";
 
@@ -20,22 +19,20 @@ export class ApiRouter {
     }
 
     public configure(): void {
-        this.router.get("/:peerType", (req, res, next) => {
+        this.router.get("/:peerType", (req, res) => {
             try {
-                res.status(200).send(this.peerService.getPeer(req.params.peerType));
-                next();
+                res.status(200).json(this.peerService.getPeer(req.params.peerType));
             } catch (error) {
-                next(new UnknownPeerTypeException("test"));
+                res.status(500).send({error: error.message, type: error.name});
             }
         });
 
-        this.router.post("/:peerType", (req, res, next) => {
+        this.router.post("/:peerType", (req, res) => {
             try {
-                this.peerService.addPeer(req.params.peerType, req.params.ip, req.params.guid);
+                this.peerService.addPeer(req.params.peerType, req.query.ip, req.query.guid);
                 res.status(201).send();
-                next();
             } catch (error) {
-                next(error);
+                res.status(500).send({error: error.message, type: error.name});
             }
         });
     }

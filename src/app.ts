@@ -1,8 +1,9 @@
 import { logger } from "@blockr/blockr-logger/dist/logger";
 import * as Sentry from "@sentry/node";
+import * as parser from "body-parser";
+import * as cors from "cors";
 import * as express from "express";
 
-import { errorHandlingMiddleware } from "./middleware/errorHandlingMiddleware";
 import { ApiRouter } from "./routers/api.router";
 import { PeerService } from "./services/peer.service";
 
@@ -21,8 +22,10 @@ export class App {
     }
 
     private initializeServer(server: express.Express, router: ApiRouter): express.Application {
-        server.use(errorHandlingMiddleware);
         router.configure();
+
+        server.use(cors({credentials: true, origin: true}));
+        server.use(parser.urlencoded({extended: true}));
         server.use(router.path, router.router);
 
         return server;
