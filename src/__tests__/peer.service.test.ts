@@ -29,6 +29,19 @@ describe("Adding peers to the service and retrieving them", () => {
         expect(ipfsIp).not.toBeNull();
         expect(ipfsIp).toMatch(TestIps.TEST_3);
     });
+
+    it("Should succeed", () => {
+        peerService.addPeer(PeerType.VALIDATOR, TestIps.TEST_1, TestGuids.TEST_1);
+        peerService.addPeer(PeerType.VALIDATOR, TestIps.TEST_2, TestGuids.TEST_2);
+        const validatorIp = peerService.getPeer(PeerType.VALIDATOR);
+        const validatorIp2 = peerService.getPeer(PeerType.VALIDATOR);
+
+        expect(validatorIp).not.toBeNull();
+        expect(validatorIp2).not.toBeNull();
+
+        expect([TestIps.TEST_1, TestIps.TEST_2]).toContain(validatorIp);
+        expect([TestIps.TEST_1, TestIps.TEST_2]).toContain(validatorIp2);
+    });
 });
 
 describe("Retrieving peers of types that are not yet added", () => {

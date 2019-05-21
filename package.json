@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build-watch": "tsc -w -p tsconfig.json",
-    "test": "jest || exit 0",
+    "test": "jest || exit 0 --collectCoverage",
     "lint": "tslint --project tsconfig.json",
     "dev": "npm run build && npm run lint"
   },
