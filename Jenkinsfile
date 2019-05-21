@@ -1,6 +1,6 @@
 #!groovy
 
-@Library('blockr-jenkins-rendezvous') _
+@Library('blockr-jenkins-lib') _
 
 String repo = 'blockr-p2p-rendezvous'
 
