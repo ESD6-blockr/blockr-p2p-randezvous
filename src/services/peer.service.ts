@@ -9,6 +9,16 @@ export class PeerService {
         this.peerRegistries = new Map<PeerType, PeerRegistry>();
     }
 
+    public getPeer(peerType: PeerType): string {
+        const peerRegistry = this.peerRegistries.get(peerType);
+
+        if (!peerRegistry) {
+            throw new UnknownPeerTypeException(`No implementation found for Peer Type '${peerType}`);
+        }
+
+        return peerRegistry.getIp();
+    }
+
     public addPeer(peerType: PeerType, ip: string, guid: string): void {
         let peerRegistry = this.peerRegistries.get(peerType);
 
@@ -18,15 +28,5 @@ export class PeerService {
         }
 
         peerRegistry.addIp(ip, guid);
-    }
-
-    public getPeer(peerType: PeerType): string {
-        const peerRegistry = this.peerRegistries.get(peerType);
-
-        if (!peerRegistry) {
-            throw new UnknownPeerTypeException(`No implementation found for Peer Type '${peerType}`);
-        }
-
-        return peerRegistry.getIp();
     }
 }
