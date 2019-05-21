@@ -2,7 +2,7 @@ import { UnknownPeerTypeException } from "../exceptions/unknownPeerType.exceptio
 import { PeerType } from "../models/peerTypes";
 import { PeerRegistry } from "../registries/peer.registry";
 
-const CONNECTION_TIMEOUT_DURATION_MINUTES = 5
+const CONNECTION_TIMEOUT_DURATION_MINUTES = 5;
 
 /**
  * Handles the Peer Registries.
