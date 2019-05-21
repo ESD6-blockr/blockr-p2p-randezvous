@@ -4,6 +4,9 @@ import { PeerService } from "../services/peer.service";
 
 const ROUTE = "/api/v1";
 
+/**
+ * Handles the rest routes for the api.
+ */
 export class ApiRouter {
     public path: string;
     public router: Router;
@@ -18,6 +21,9 @@ export class ApiRouter {
         this.router.use(this.path, this.router);
     }
 
+    /**
+     * Configure the routes.
+     */
     public configure(): void {
         this.router.get("/:peerType", (req, res) => {
             try {
